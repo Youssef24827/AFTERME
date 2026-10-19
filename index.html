@@ -2,231 +2,342 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#05080d">
-<meta name="description" content="Une transmission fictive de ton toi du futur. Entre dans AFTERME.">
-<title>AFTERME — Transmission 2036</title>
-<style>
-:root {
-  --bg:#05080d; --panel:#0a121c; --cyan:#55efff;
-  --muted:#7893a5; --line:#193342; --white:#effcff;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0; min-height:100vh; color:var(--white);
-  background:radial-gradient(ellipse at 50% 0%,#102534 0%,var(--bg) 58%);
-  font-family:Inter,ui-sans-serif,system-ui,sans-serif;
-}
-body::after {
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:5;
-  opacity:.12;
-  background:repeating-linear-gradient(0deg,transparent 0 3px,#8befff 4px);
-}
-header,main,footer { width:min(900px,92%); margin:auto; }
-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:25px 0; border-bottom:1px solid var(--line);
-}
-.logo { font-weight:900; letter-spacing:4px; font-size:20px; }
-.logo span,.cyan { color:var(--cyan); }
-.status { color:var(--cyan); font-size:11px; letter-spacing:1px; }
-main { padding:65px 0 50px; }
-.eyebrow {
-  color:var(--cyan); font-size:11px; letter-spacing:3px;
-  text-align:center;
-}
-h1 {
-  text-align:center; font-size:clamp(35px,7vw,66px);
-  line-height:1.02; letter-spacing:-2px; margin:20px 0;
-}
-.subtitle {
-  text-align:center; color:var(--muted); line-height:1.7;
-  max-width:500px; margin:0 auto;
-}
-.scanner {
-  position:relative; width:180px; height:180px; margin:35px auto;
-  border:1px solid #245063; border-radius:50%;
-  display:grid; place-items:center;
-  background:radial-gradient(circle,#103343 0%,#07111a 65%);
-  box-shadow:0 0 55px #28d9f522,inset 0 0 30px #28d9f515;
-}
-.scanner::before,.scanner::after {
-  content:""; position:absolute; border:1px dashed #286173;
-  border-radius:50%;
-}
-.scanner::before { inset:13px; animation:spin 14s linear infinite; }
-.scanner::after { inset:31px; border-style:solid; animation:spin 8s linear infinite reverse; }
-.core {
-  width:35px; height:35px; border-radius:50%; background:var(--cyan);
-  box-shadow:0 0 15px var(--cyan),0 0 50px #2be7ff;
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-@keyframes pulse { 50% { opacity:.45; transform:scale(.8); } }
-.panel {
-  max-width:580px; margin:0 auto; padding:25px;
-  border:1px solid var(--line); background:#09111bee; border-radius:12px;
-}
-label {
-  display:block; font-size:11px; letter-spacing:1px;
-  color:#9ab5c5; margin:17px 0 8px;
-}
-input,textarea {
-  width:100%; padding:13px; color:var(--white);
-  background:#050b12; border:1px solid #203d4c; border-radius:6px;
-  font:inherit; outline:none;
-}
-input:focus,textarea:focus { border-color:var(--cyan); }
-textarea { min-height:90px; resize:vertical; }
-button {
-  width:100%; margin-top:22px; padding:15px;
-  background:var(--cyan); color:#041016; border:0; border-radius:5px;
-  font-weight:900; letter-spacing:1px; cursor:pointer;
-  transition:.2s;
-}
-button:hover { box-shadow:0 0 25px #55efff55; transform:translateY(-1px); }
-button:disabled { opacity:.65; cursor:wait; }
-.note { text-align:center; color:var(--muted); font-size:11px; line-height:1.6; }
-#result { display:none; }
-.message {
-  margin:22px 0; padding:22px; border-left:2px solid var(--cyan);
-  background:#061018; font-size:19px; line-height:1.8;
-}
-footer {
-  border-top:1px solid var(--line); padding:22px 0 35px;
-  display:flex; justify-content:space-between; gap:15px;
-  color:var(--muted); font-size:10px; letter-spacing:1px;
-}
-@media(max-width:500px) {
-  main { padding-top:42px; }
-  .panel { padding:18px; }
-  .status { font-size:9px; }
-  footer { flex-direction:column; }
-}
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after { animation:none!important; transition:none!important; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05090d">
+  <title>AFTERME — Un message pour plus tard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05090d;
+      --panel: #0b141c;
+      --cyan: #65e8ff;
+      --muted: #94a8b8;
+      --line: #203340;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 16px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, #102b3b 0%, transparent 55%),
+        var(--bg);
+      color: #f1f8fc;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    main { width: 100%; max-width: 560px; }
+
+    header { text-align: center; margin-bottom: 26px; }
+
+    .logo {
+      color: var(--cyan);
+      font-size: 12px;
+      letter-spacing: 7px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 15px 0 8px;
+      font-size: clamp(34px, 8vw, 52px);
+      letter-spacing: -2px;
+    }
+
+    h1 span { color: var(--cyan); }
+
+    .subtitle { color: var(--muted); line-height: 1.6; }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      background: linear-gradient(145deg, #0d1b25, #080e14);
+      box-shadow: 0 20px 80px #0008;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-size: 13px;
+      color: #c6d7e2;
+    }
+
+    textarea, input {
+      display: block;
+      width: 100%;
+      border: 1px solid #29404e;
+      border-radius: 10px;
+      padding: 13px;
+      color: white;
+      background: #060c11;
+      font: inherit;
+      outline: none;
+    }
+
+    textarea { min-height: 150px; resize: vertical; }
+    textarea:focus, input:focus { border-color: var(--cyan); }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--cyan);
+      color: #041017;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:disabled { opacity: .55; cursor: wait; }
+
+    button.secondary {
+      border: 1px solid #29404e;
+      background: #101d27;
+      color: #e8f8ff;
+    }
+
+    .status {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #071018;
+      border: 1px solid var(--line);
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .status.show { display: block; }
+    .accent { color: var(--cyan); }
+    .muted { color: var(--muted); font-size: 13px; }
+    .secret-link { color: var(--cyan); overflow-wrap: anywhere; }
+    .message { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #718695;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="logo">AFTER<span>ME</span></div>
-  <div class="status" id="status">● SYSTEM ONLINE</div>
-</header>
-
 <main>
-  <div class="eyebrow">FUTURE SELF TRANSMISSION SYSTEM</div>
-  <h1>A MESSAGE FROM<br><span class="cyan">YOUR FUTURE SELF</span></h1>
-  <p class="subtitle">
-    Une autre version de toi. Une autre perspective.
-    Une transmission fictive depuis le 17 octobre 2036.
-  </p>
+  <header>
+    <div class="logo">FUTURE TRANSMISSION</div>
+    <h1>AFTER<span>ME</span></h1>
+    <div class="subtitle">
+      Écris aujourd'hui.<br>
+      Découvre-le au moment choisi.
+    </div>
+  </header>
 
-  <div class="scanner" aria-label="Scanner animé">
-    <div class="core"></div>
-  </div>
+  <section class="panel">
+    <div id="createView">
+      <h2>Un message pour ton futur</h2>
+      <p class="muted">
+        Ton message sera conservé en privé jusqu'à sa date de révélation.
+      </p>
 
-  <section class="panel" id="formPanel">
-    <div class="eyebrow">01 / IDENTIFICATION</div>
-    <form id="transmissionForm">
-      <label for="alias">TON NOM OU PSEUDO</label>
-      <input id="alias" maxlength="40" placeholder="Voyageur inconnu" autocomplete="nickname">
+      <form id="createForm">
+        <label for="message">Ton message</label>
+        <textarea id="message" maxlength="5000"
+          placeholder="Qu'aimerais-tu dire à ton futur toi ?"
+          required></textarea>
 
-      <label for="dream">QU'ESPÈRES-TU ACCOMPLIR ?</label>
-      <input id="dream" maxlength="160" placeholder="Un rêve, un projet, un objectif...">
+        <label for="date">Date de révélation</label>
+        <input id="date" type="date" required>
 
-      <label for="thought">QU'AS-TU EN TÊTE AUJOURD'HUI ?</label>
-      <textarea id="thought" maxlength="500" placeholder="Ce que tu aimerais dire à ton toi du futur..."></textarea>
+        <button id="createButton" type="submit">
+          SCELLER MON MESSAGE ↗
+        </button>
+      </form>
 
-      <button id="submit" type="submit">INITIATE TRANSMISSION →</button>
-    </form>
-    <p class="note">AUCUNE INSCRIPTION · AUCUNE API · GRATUIT</p>
+      <div id="createStatus" class="status" aria-live="polite"></div>
+    </div>
+
+    <div id="revealView" hidden>
+      <h2 id="revealTitle">Transmission temporelle</h2>
+      <p id="revealIntro" class="muted">
+        Vérification de ton lien secret…
+      </p>
+      <div id="revealStatus" class="status show" aria-live="polite">
+        Chargement…
+      </div>
+      <button id="checkButton" class="secondary" type="button" hidden>
+        VÉRIFIER À NOUVEAU
+      </button>
+    </div>
   </section>
 
-  <section class="panel" id="result" aria-live="polite">
-    <div class="eyebrow">TRANSMISSION DÉCODÉE</div>
-    <h2 class="cyan" id="greeting">MESSAGE REÇU.</h2>
-    <p class="note">DESTINATAIRE : <span id="recipient"></span></p>
-    <div class="message" id="message"></div>
-    <p id="dreamLine"></p>
-    <p class="note">ARCHIVE FICTIONNELLE · PAS UNE PRÉDICTION RÉELLE</p>
-    <button id="copy" type="button">COPIER MA TRANSMISSION</button>
-    <button id="again" type="button" style="background:transparent;color:var(--cyan);border:1px solid var(--cyan)">
-      NOUVELLE TRANSMISSION ↻
-    </button>
-  </section>
+  <footer>
+    AFTERME · Un petit message envoyé à travers le temps.<br>
+    Garde ton lien secret : toute personne qui le possède peut accéder
+    au message une fois la date atteinte.
+  </footer>
 </main>
 
-<footer>
-  <span>AFTERME © 2036</span>
-  <span>FICTIONAL EXPERIENCE // BUILD 001</span>
-</footer>
-
 <script>
-const $ = id => document.getElementById(id);
-const templates = [
-  name => `Salut ${name}. Tu pensais devoir avoir toutes les réponses avant de commencer. En réalité, tu avais juste besoin de faire le premier pas. N'attends pas d'être prêt pour commencer à construire la vie que tu imagines.`,
-  name => `${name}, je me souviens de cette période où tout semblait incertain. Tu ne pouvais pas voir la suite, mais tu continuais d'avancer. Les petits pas comptaient plus que tu ne le croyais. Continue, même lentement.`,
-  name => `Message pour ${name} : tu te demandais si tes rêves étaient réalistes. La meilleure chose que tu as faite, c'est de leur donner une chance au lieu de seulement les imaginer. Garde cette curiosité.`
-];
+  const $ = (id) => document.getElementById(id);
 
-$('transmissionForm').addEventListener('submit', event => {
-  event.preventDefault();
-  const name = $('alias').value.trim() || 'voyageur';
-  const dream = $('dream').value.trim();
-  const thought = $('thought').value.trim();
-  const button = $('submit');
+  // La date minimale est demain, selon l'heure locale du navigateur.
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const localTomorrow =
+    tomorrow.getFullYear() + "-" +
+    String(tomorrow.getMonth() + 1).padStart(2, "0") + "-" +
+    String(tomorrow.getDate()).padStart(2, "0");
+  $("date").min = localTomorrow;
 
-  button.disabled = true;
-  $('status').textContent = '◌ SEARCHING FOR SIGNAL';
-  $('formPanel').style.display = 'none';
-  $('result').style.display = 'block';
-  $('greeting').textContent = 'SCAN EN COURS...';
-  $('message').textContent = 'Recherche d’une transmission dans l’archive temporelle.';
-  $('dreamLine').textContent = '';
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  const index = Math.floor(Math.random() * templates.length);
-  window.setTimeout(() => {
-    $('status').textContent = '● SIGNAL RECEIVED';
-    $('greeting').textContent = 'MESSAGE REÇU.';
-    $('recipient').textContent = name;
-    $('message').textContent = templates[index](name);
-    $('dreamLine').textContent = dream
-      ? `OBJECTIF DU PRÉSENT : ${dream}`
-      : 'Le futur n’est pas écrit. Tu peux commencer aujourd’hui.';
-    if (thought) {
-      $('dreamLine').textContent += ` — NOTE DU PRÉSENT : ${thought}`;
-    }
-    button.disabled = false;
-  }, 1600);
-});
-
-$('copy').addEventListener('click', async () => {
-  const text = `AFTERME // TRANSMISSION 2036\n${$('message').textContent}\n${$('dreamLine').textContent}\n\nFiction créative, pas une prédiction réelle.`;
-  try {
-    await navigator.clipboard.writeText(text);
-    $('copy').textContent = 'TRANSMISSION COPIÉE ✓';
-  } catch {
-    const area = document.createElement('textarea');
-    area.value = text;
-    document.body.appendChild(area);
-    area.select();
-    document.execCommand('copy');
-    area.remove();
-    $('copy').textContent = 'TRANSMISSION COPIÉE ✓';
+  function showStatus(element, html) {
+    element.innerHTML = html;
+    element.classList.add("show");
   }
-});
 
-$('again').addEventListener('click', () => {
-  $('transmissionForm').reset();
-  $('result').style.display = 'none';
-  $('formPanel').style.display = 'block';
-  $('status').textContent = '● SYSTEM ONLINE';
-  $('copy').textContent = 'COPIER MA TRANSMISSION';
-  window.scrollTo({top:0,behavior:'smooth'});
-});
+  $("createForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const button = $("createButton");
+    const status = $("createStatus");
+    button.disabled = true;
+    button.textContent = "SCELLAGE EN COURS…";
+    showStatus(status, "Enregistrement sécurisé du message…");
+
+    try {
+      const response = await fetch("/api/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: $("message").value,
+          delivery_date: $("date").value
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Impossible de créer le message.");
+      }
+
+      status.textContent = "";
+      const title = document.createElement("h3");
+      title.className = "accent";
+      title.textContent = "Ton message est scellé.";
+
+      const info = document.createElement("p");
+      info.textContent =
+        "Date de révélation : " + data.delivery_date;
+
+      const explanation = document.createElement("p");
+      explanation.className = "muted";
+      explanation.textContent =
+        "Copie ce lien et conserve-le précieusement. Il ne sera pas révélé avant la date choisie.";
+
+      const link = document.createElement("a");
+      link.className = "secret-link";
+      link.href = data.link;
+      link.textContent = data.link;
+      link.rel = "noreferrer";
+
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.textContent = "COPIER MON LIEN SECRET";
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(data.link);
+          copy.textContent = "LIEN COPIÉ ✓";
+        } catch {
+          copy.textContent = "Sélectionne et copie le lien ci-dessus";
+        }
+      });
+
+      status.replaceChildren(title, info, explanation, link, copy);
+      status.classList.add("show");
+    } catch (error) {
+      showStatus(status, "");
+      status.textContent = error.message;
+    } finally {
+      button.disabled = false;
+      button.textContent = "SCELLER MON MESSAGE ↗";
+    }
+  });
+
+  async function revealMessage(token) {
+    const status = $("revealStatus");
+    const button = $("checkButton");
+    button.disabled = true;
+    button.hidden = false;
+    button.textContent = "VÉRIFICATION…";
+    showStatus(status, "Vérification de la date…");
+
+    try {
+      const response = await fetch(
+        "/api/reveal?token=" + encodeURIComponent(token),
+        { cache: "no-store" }
+      );
+
+      const data = await response.json();
+
+      if (response.status === 423 && data.locked) {
+        showStatus(status, "");
+        const title = document.createElement("h3");
+        title.className = "accent";
+        title.textContent = "Encore un peu de patience…";
+
+        const message = document.createElement("p");
+        message.textContent = data.message;
+
+        const date = document.createElement("p");
+        date.className = "muted";
+        date.textContent = "Révélation prévue le " + data.delivery_date;
+
+        status.replaceChildren(title, message, date);
+        button.hidden = false;
+      } else if (!response.ok) {
+        throw new Error(data.error || "Impossible d'ouvrir ce lien.");
+      } else {
+        showStatus(status, "");
+        const title = document.createElement("h3");
+        title.className = "accent";
+        title.textContent = "Transmission déverrouillée";
+
+        const date = document.createElement("p");
+        date.className = "muted";
+        date.textContent = "Écrit pour être découvert le " + data.delivery_date;
+
+        const message = document.createElement("div");
+        message.className = "message";
+        message.textContent = data.message;
+
+        status.replaceChildren(title, date, message);
+        button.hidden = true;
+      }
+    } catch (error) {
+      status.textContent = error.message;
+      button.hidden = false;
+    } finally {
+      button.disabled = false;
+      if (!button.hidden) button.textContent = "VÉRIFIER À NOUVEAU";
+    }
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+
+  if (token) {
+    $("createView").hidden = true;
+    $("revealView").hidden = false;
+    $("checkButton").addEventListener("click", () => revealMessage(token));
+    revealMessage(token);
+  }
 </script>
 </body>
 </html>
